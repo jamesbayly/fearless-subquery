@@ -1,22 +1,26 @@
-specVersion: 0.0.1
+specVersion: 1.0.0
+name: fearless-subql
+version: 1.0.0
+runner:
+  node:
+    name: "@subql/node"
+    version: "*"
+  query:
+    name: "@subql/query"
+    version: "*"
 description: Fearless SubQuery project
-repository: 'https://github.com/ef1rspb/subquery-fearless'
-schema: ./schema.graphql
+repository: "https://github.com/ef1rspb/subquery-fearless"
+schema:
+  file: ./schema.graphql
 network:
-  endpoint: 'wss://kusama-rpc.polkadot.io'
+  chainId: "0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe"
+  endpoint: "wss://kusama.api.onfinality.io/public-ws"
+  dictionary: "https://api.subquery.network/sq/subquery/kusama-dictionary"
 dataSources:
-  - name: main
-    kind: substrate/Runtime
+  - kind: substrate/Runtime
     startBlock: 1
-
-    # polkadot test slash bloks: 3570179
-
-    # westend test stake block: 6000000
-    # kusama test stake block: 8124580
-    # polkadot test stake block: 5645004
-
-    # polkadot test rewards block: 5704983
     mapping:
+      file: ./dist/index.js
       handlers:
         - handler: handleHistoryElement
           kind: substrate/CallHandler
